@@ -15,13 +15,13 @@ import React from 'react';
 const FIELD_CELL_WIDTH_PERCENTAGE = '35%';
 const FIELD_DESCRIPTION_CELL_WIDTH_PERCENTAGE = '65%';
 
-function TableStructureApp() {
-    // useBase will re-render the app whenever the base's configuration changes: this includes
+function TableStructureExtension() {
+    // useBase will re-render the extension whenever the base's configuration changes: this includes
     // updates to names, descriptions and field options, as well as tables/fields being added or
-    // removed. This means the app will always show the latest structure.
+    // removed. This means the extension will always show the latest structure.
     const base = useBase();
 
-    // useWatchable is used to re-render the app whenever the active table or view changes.
+    // useWatchable is used to re-render the extension whenever the active table or view changes.
     useWatchable(cursor, ['activeTableId', 'activeViewId']);
 
     // table can be null if it's a new table being created and activeViewId can be null while the
@@ -58,7 +58,7 @@ function TableSchema({base, table, view}) {
             </Box>
             <Box margin={3}>
                 <HeaderRow />
-                {viewMetadata.visibleFields.map(field => {
+                {viewMetadata.visibleFields.map((field) => {
                     return <FieldRow base={base} table={table} field={field} key={field.id} />;
                 })}
             </Box>
@@ -121,7 +121,7 @@ function getHumanReadableFieldType(field) {
             return field.type
                 .replace(/([A-Z])/g, ' $1')
                 .toLowerCase()
-                .replace(/^./, function(str) {
+                .replace(/^./, function (str) {
                     return str.toUpperCase();
                 });
     }
@@ -145,4 +145,4 @@ function Cell({children, width}) {
     );
 }
 
-initializeBlock(() => <TableStructureApp />);
+initializeBlock(() => <TableStructureExtension />);
